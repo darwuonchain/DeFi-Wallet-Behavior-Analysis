@@ -1,249 +1,187 @@
-**DeFi Wallet Behavior Analysis**
+#  DeFi Wallet Behavior Analysis  
 
-**An On-Chain Behavioral Segmentation of DeFi Wallets**
+### An On-Chain Behavioral Segmentation of DeFi Wallets  
 
-1.**Project Overview**
+---
 
-This project analyzes DeFi wallet activity to uncover distinct behavioral patterns using on-chain data and machine learning techniques.
+##  1. Project Overview  
+
+This project analyzes DeFi wallet activity to uncover distinct behavioral patterns using on-chain data and machine learning techniques.  
+
 By applying clustering and anomaly detection, wallets are segmented into meaningful groups based on transaction frequency, volume, and protocol interaction.
 
-2.**Research Objectives**
+---
 
-Segment wallets into distinct behavioral groups
+##  2. Research Objectives  
 
-Differentiate traders, holders, and bots
+- Segment wallets into distinct behavioral groups  
+- Differentiate traders, holders, and bots  
+- Detect abnormal (bot-like) activity  
+- Understand how transaction patterns define wallet behavior  
 
-Detect abnormal (bot-like) activity
+---
 
-Understand how transaction patterns define wallet behavior
+##  3. Data Sources  
 
-3.	**Data Sources**
+- Dune Analytics (primary source)  
+- Aggregated wallet-level transaction data  
 
-Dune Analytics (primary source)
+---
 
-Aggregated wallet-level transaction data
+##  4. Blockchains Analyzed  
 
-4.	**Blockchains Analyzed**
+- Ethereum  
+- Polygon  
 
-Ethereum
+---
 
-Polygon
+##  5. Stablecoins Tracked  
 
-5.	**Stablecoins Tracked**
+- USDT  
+- USDC  
+- DAI  
 
-USDT
+---
 
-USDC
+##  6. Dataset Structure  
 
-DAI
+| Feature | Description |
+|--------|------------|
+| wallet | Wallet address |
+| tx_count | Total transactions |
+| total_volume | Total transaction value |
+| avg_tx_value | Average transaction value |
+| active_days | Wallet lifespan |
+| protocols_used | Number of protocols used |
+| chain | Blockchain network |
 
-6.	**Dataset Structure**
+---
 
-Each wallet-level record includes:
+##  7. Project Workflow  
 
-Feature                                                  Description
-wallet                                                Wallet address
-tx_count                                              Total transactions
-total_volume                                           Total transaction value
-avg_tx_value                                         Average transaction value
-active_days                                          Wallet lifespan 
-protocols_used                                       Number of protocols used 
-chain                                               Blockchain network
+### 🔹 Phase 1 — Data Cleaning & Preparation  
+- Removed duplicates and missing values  
+- Standardized formats and ensured numeric consistency  
+- Applied wallet validation and logical filtering  
 
-7.	**Project Workflow**
+---
 
-Phase 1 — Data Cleaning & Preparation
+### 🔹 Phase 2 — Feature Engineering  
+- Created behavioral metrics (transaction intensity)  
+- Applied log transformation to handle skewed distributions  
 
-Removed duplicates and missing values
+---
 
-Standardized formats and ensured numeric consistency
+### 🔹 Phase 3 — Clustering (K-Means)  
+- Applied KMeans clustering  
+- Used Elbow Method to determine optimal K  
 
-Applied wallet validation and logical filtering
+**Key Finding:**
 
-**Insight**:
+K = 3  
 
-A structured data cleaning pipeline ensures high-quality and reliable blockchain behavioral data.
+Clusters:
+- Traders  
+- Holders  
+- Bots  
 
-Phase 2 — Feature Engineering
+---
 
-Selected key behavioral features
+### 🔹 Phase 4 — PCA Visualization  
+- Reduced dimensions using PCA  
+- Visualized behavioral separation  
 
-Created derived metrics (e.g., transaction intensity)
+**Insight:** Clear structural separation of wallet behaviors  
 
-Applied log transformation to handle skewed distributions
+---
 
-**Insight**:
+### 🔹 Phase 5 — Anomaly Detection  
+- Applied Isolation Forest  
 
-Log scaling reduces the dominance of extreme values and improves interpretability.
+**Result:** ~5% anomalous wallets detected  
 
-Phase 3 — Clustering (K-Means)
+---
 
-Applied KMeans to segment wallets into clusters
+##  8. Wallet Personas  
 
-Used the Elbow Method to determine optimal K
+### 🔵 Traders  
+- High transaction frequency  
+- Moderate transaction value  
+- Multi-protocol usage  
 
-**Key Finding**:
+### 🟢 Holders  
+- Low transaction frequency  
+- High-value transactions  
+- Long-term holding behavior  
 
-K = 3 provides the optimal balance between simplicity and performance
+### 🔴 Bots  
+- Extremely high frequency  
+- Very low transaction value  
+- Repetitive automated behavior  
 
-**Interpretation**:
+---
 
-Clusters align with real-world DeFi roles:
+##  Key Behavioral Insight  
 
-Traders
+- Frequency → Bots  
+- Value → Holders  
+- Balanced → Traders  
 
-Holders
+---
 
-Bots
+##  9. Visualizations  
 
-**Phase 4 — PCA Visualization**
+- Elbow Method  
+- PCA Clusters  
+- Anomaly Detection  
+- Cluster Comparison  
 
-Reduced feature space using PCA
+---
 
-Visualized clusters in 2D
+##  10. Tools & Technologies  
 
-**Insights**:
+- Python  
+- Pandas  
+- NumPy  
+- Scikit-learn  
+- Matplotlib  
+- Jupyter Notebook  
+- Seaborn (optional for EDA)  
 
-Clear separation between wallet types
+---
 
-Behavioral intensity drives clustering
+##  11. Applications  
 
-Outliers indicate abnormal or automated activity
+- Fraud and bot detection in DeFi  
+- Wallet segmentation for analytics platforms  
+- Risk scoring systems  
+- Blockchain behavioral intelligence  
+- Market behavior analysis  
 
-**Critical Insight**:
+---
 
-A small subset of wallets behaves fundamentally differently — likely bots or high-frequency systems.
+##  12. Project Structure  
 
-Phase 5 — Anomaly Detection
-
-Applied Isolation Forest to detect abnormal behavior
-
-**Result**:
-
-~5% of wallets identified as anomalous
-
-**Interpretation**:
-
-These wallets exhibit:
-
-Extremely high transaction frequency
-
-Irregular transaction patterns
-
-Non-organic behavior
-
-Phase 6 — Key Insights
-
-Bots dominate high-frequency, low-value transactions
-
-Traders interact across multiple protocols
-
-Holders exhibit low-frequency, high-value behavior
-
-A small subset of wallets drives the majority of activity
-
-8.**Wallet Personas**
-
-🔵 Traders
-
-Behavior:
-
-High transaction frequency
-
-Moderate transaction value
-
-Multi-protocol usage
-
-**Interpretation**:
-
-Active DeFi participants engaging in frequent trading and liquidity activities
-
-🟢 Holders
-
-Behavior:
-
-Low transaction frequency
-
-High-value transactions
-
-Long-term activity
-
-**Interpretation**:
-
-Investment-oriented wallets holding assets over time
-
-🔴 Bots
-
-Behavior:
-
-Extremely high transaction frequency
-
-Very low transaction value
-
-Repetitive patterns
-
-**Interpretation**:
-
-Automated systems executing algorithmic or high-frequency transactions
-
-Key Behavioral Insight
-
-Frequency-driven wallets → Bots
-
-Value-driven wallets → Holders
-
-Balanced activity → Traders
-
-9.	Visualizations
-
-Elbow Method
-
-PCA Clusters
-
-Anomaly Detection
-
-Cluster Comparison
-
-10. **Project Structure**
-
+```bash
 project/
 │
 ├── data/              # Raw & processed datasets
 ├── notebooks/         # Jupyter notebooks
-├── visuals/           # Charts & plots
-├── src/               # Data processing & modeling scripts
-├── README.md          # Documentation
+├── visuals/           # Generated charts & plots
+├── src/               # Scripts (cleaning, modeling)
+├── README.md          # Project documentation
 └── requirements.txt   # Dependencies
 
-11.	**Tools & Technologies**
+##  13. Conclusion  
 
-Python
+This project demonstrates that DeFi wallet behavior can be effectively segmented using machine learning techniques.  
 
-Pandas
+Clustering, PCA, and anomaly detection reveal structured behavioral patterns that reflect real-world usage of decentralized finance systems.  
 
-NumPy
+---
 
-Scikit-learn
+##  14. Final Insight  
 
-Matplotlib
+On-chain transaction behavior is highly structured and measurable, enabling clear separation between human-driven and automated wallet activity in DeFi ecosystems.  
 
-12.**Applications**
-
-Fraud and bot detection
-
-DeFi user segmentation
-
-Risk scoring systems
-
-Blockchain behavioral analytics
-
-13.	**Conclusion**
-
-This project demonstrates that DeFi wallet behavior can be effectively segmented using machine learning.
-Clustering, PCA, and anomaly detection reveal structured and interpretable behavioral patterns within on-chain activity.
-
-14.	**Final Insight**
-
-On-chain transaction behavior is structured and measurable, enabling clear distinction between human-driven activity and automated systems in DeFi ecosystems.
-
-
+This makes machine learning a powerful tool for understanding financial behavior, detecting anomalies, and classifying wallet personas in decentralized systems.
